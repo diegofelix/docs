@@ -1,31 +1,31 @@
-# Configuration
+# Configuração
 
-- [Introduction](#introduction)
-- [Environment Configuration](#environment-configuration)
+- [Introdução](#introduction)
+- [Configuração do Ambiente](#environment-configuration)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-All of the configuration files for the Laravel framework are stored in the `app/config` directory. Each option in every file is documented, so feel free to look through the files and get familiar with the options available to you.
+Todos os arquivos de configuração do Laravel framework estão armazenados no diretório `app/config`. Cada opção de todos os arquivos estão documentados, então sinta-se a vontade para olhar os arquivos e se famializar com as opçãos disponíveis para você.
 
-Sometimes you may need to access configuration values at run-time. You may do so using the `Config` class:
+As vezes você terá necessidade de acessar algum valor em run-time. Voce poderá fazer isso utilizando-se da class `Config`:
 
-**Accessing A Configuration Value**
+**Acessando Um Valor Da Configuração**
 
 	Config::get('app.timezone');
 
-Notice that "dot" style syntax may be used to access values in the various files. You may also set configuration values at run-time:
+Nota-se que "ponto ( . )" é o estilo da sintaxe pode ser usado para acessar os valores de varios arquivos. Voce também poderá setar um valor na configuração em run-time:
 
-**Setting A Configuration Value**
+**Setando Um Valor De Configuração**
 
 	Config::set('database.default', 'sqlite');
 
 <a name="environment-configuration"></a>
-## Environment Configuration
+## Configuração de Ambiente
 
-It is often helpful to have different configuration values based on the environment the application is running in. For example, you may wish to use a different cache driver on your local development machine than on the production server. It is easy to accomplish this using environment based configuration.
+Muitas vezes é útil ter diferente valores de configurações baseado em um ambiente de aplicação que estamos rodando. Por exemplo, você pode querer utilizar um driver de cache diferente para o ambiente local de desenvolvimento que de um servidor de produção. Isto é fácil para acoplar usando configuração baseado em um ambiente.
 
-Simply create a folder within the `config` directory that matches your environment name, such as `local`. Next, create the configuration files you wish to override and specify the options for that environment. For example, to override the cache driver for the local environment, you would create a `cache.php` file in `app/config/local` with the following content:
+Simples criando uma pasta dentro do diretorio `config` que combina com o nome do seu ambiente, semelhante a `local`. Próximo, criar o arquivo de configuração que você deseja sobrescrever e ou especificar as opções do ambiente. Por exemplo, para sobrescrever o caminho do cache para o ambiente `local`, voce deverá criar o arquivo `cache.php` em `app/config/local` com o seguinte conteúdo:
 
 	<?php
 
@@ -35,29 +35,29 @@ Simply create a folder within the `config` directory that matches your environme
 
 	);
 
-> **Note:** Do not use 'testing' as an environment name. This is reserved for unit testing.
+> **Nota:** Não utilize o nome `testing` para nome de ambientes. Pois esté nome é reservado para testes unitários (PHPUnit).
 
-Notice that you do not have to specify _every_ option that is in the base configuration file, but only the options you wish to override. The environment configuration files will "cascade" over the base files.
+Observe que você não precisa especificar _todas_ as opções que está no arquivo de configuração base, mais somente as opções que você deseja alterar. Os arquivos de configuração do ambiente são carregados "em cascata" sobre o arquivo base
 
-Next, we need to instruct the framework how to determine which environment it is running in. The default environment is always `production`. However, you may setup other environments within the `bootstrap/start.php` file at the root of your installation. In this file you will find an `$app->detectEnvironment` call. The array passed to this method is used to determine the current environment. You may add other environments and machine names to the array as needed.
+Em seguida, presisamos instruir o quadro para o framework em qual ambiente está sendo executado. Por padrão o ambiente é `production`. Contudo, voce pode configurar outro ambiente dentro do arquivo root `bootstrap/start.php` da sua instalação. Neste arquivo você deverá procurar pela chamada `$app->detectEnvironment`. E então passar um array para o metodo que vocês está usando um determinado ambiente. Você pode adicionar outros ambiente e nomes para maquinas para o array conforme necessário.
 
     <?php
 
     $env = $app->detectEnvironment(array(
 
-        'local' => array('your-machine-name'),
+        'local' => array('nome-da-sua-maquina'),
 
     ));
 
-You may also pass a `Closure` to the `detectEnvironment` method, allowing you to implement your own environment detection:
+Você também pode passar um `Closure` para o metodo `detectEvironment`, permitindo que você implemente o sua próprio forma de detectar o ambiente:
 
 	$env = $app->detectEnvironmnet(function()
 	{
 		return $_SERVER['MY_LARAVEL_ENV'];
 	});
 
-You may access the current application environment via the `environment` method:
+Você pode acessar o ambiente atual da aplicação pelo metodo `environment`:
 
-**Accessing The Current Application Environment**
+**Acessando O Ambiente Atual da Aplicação**
 
 	$environment = App::environment();
