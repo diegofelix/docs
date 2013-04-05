@@ -1,31 +1,31 @@
-# Pagination
+# Paginação
 
-- [Configuration](#configuration)
-- [Usage](#usage)
+- [Configuração](#configuration)
+- [Modo de usar](#usage)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-In other frameworks, pagination can be very painful. Laravel makes it a breeze. There is a single configuration option in the `app/config/view.php` file. The `pagination` option specifies which view should be used to create pagination links. By default, Laravel includes two views.
+Em outros frameworks, a paginação pode ser muito difícil. Laravel a torna fácil. Há uma única opção de configuração no arquivo `app/config/view.php`. A opção `pagination` especifica qual view deve ser usada para criar os links de paginação. Por padrão, Laravel inclui duas views.
 
-The `pagination::slider` view will show an intelligent "range" of links based on the current page, while the `pagination::simple` view will simply show "previous" and "next" buttons. **Both views are compatible with Twitter Bootstrap out of the box.**
+A view `pagination::slider` irá mostrar um intervalo inteligente de links com base na página atual, enquanto a view `pagination::simple` irá simplesmente exibir os links "anterior" e "próximo". **Ambas as views são compatíveis com o Twitter Bootstrap.**
 
 <a name="usage"></a>
-## Usage
+## Modo de usar
 
-There are several ways to paginate items. The simplest is by using the `paginate` method on the query builder or an Eloquent model.
+Existem várias maneiras de paginar os resultados. A mais simples é usando o método `paginate` na query builder ou em um model Eloquent.
 
-**Paginating Database Results**
+**Paginando resultados do banco de dados**
 
 	$users = DB::table('users')->paginate(15);
 
-You may also paginate [Eloquent](/docs/eloquent) models:
+Você também pode paginar os models [Eloquent](/docs/eloquent):
 
-**Paginating An Eloquent Model**
+**Paginando um model Eloquent**
 
 	$users = User::where('votes', '>', 100)->paginate(15);
 
-The argument passed to the `paginate` method is the number of items you wish to display per page. Once you have retrieved the results, you may display them on your view, and create the pagination links using the `links` method:
+O argumento passado para o método `paginate` é o número de itens que você deseja exibir por página. Depois de ter os resultados, você pode exibi-los em sua view, e criar os links de paginação usando o método `links`:
 
 	<div class="container">
 		<?php foreach ($users as $user): ?>
@@ -35,10 +35,10 @@ The argument passed to the `paginate` method is the number of items you wish to 
 
 	<?php echo $users->links(); ?>
 
-This is all it takes to create a pagination system! Note that we did not have to inform the framework of the current page. Laravel will determine this for you automatically.
+Isso é tudo o que é preciso para criar um sistema de paginação! Observe que não precisamos informar ao framework a página atual. Laravel var determinar isso para você automáticamente.
 
-Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
+As vezes você deseja criar os links de paginação manualmente, passando um array de itens. Você pode fazer isto usando o método `Paginator::make`:
 
-**Creating A Paginator Manually**
+**Criando um paginador manualmente**
 
 	$paginator = Paginator::make($items, $totalItems, $perPage);
