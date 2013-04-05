@@ -1,23 +1,23 @@
-# Security
+# Segurança
 
-- [Configuration](#configuration)
-- [Storing Passwords](#storing-passwords)
-- [Authenticating Users](#authenticating-users)
-- [Protecting Routes](#protecting-routes)
-- [Password Reminders & Reset](#password-reminders-and-reset)
-- [Encryption](#encryption)
+- [Configuração](#configuration)
+- [Armazenando Senhas](#storing-passwords)
+- [Autenticando Usuários](#authenticating-users)
+- [Protegendo Rotas](#protecting-routes)
+- [Lembretes de Senhas & Redefinição](#password-reminders-and-reset)
+- [Criptografia](#encryption)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-Laravel aims to make implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at `app/config/auth.php`, which contains several well documented options for tweaking the behavior of the authentication facilities.
+Laravel pretende fazer a implementação de autenticação muito simples. De fato, quase tudo é configurado para você. O arquivo de configuração de autenticação está localizado em `app/config/auth.php`, que contém várias opções bem documentadas para ajustar o comportamento das facilidades de autenticação.
 
-By default, Laravel includes a `User` model in your `app/models` directory which may be used with the default Eloquent authentication driver. Please remember when building the Schema for this Model to ensure that the password field is a minimum of 60 characters.
+Por padrão, Laravel inclui um model `User` no diretório `app/models` que pode ser utilizado como o driver padrão de autenticação do Eloquent. Por favor lembre-se ao construir o Schema para este Model que o campo senha tem no minímo 60 caracteres.
 
-If your application is not using Eloquent, you may use the `database` authentication driver which uses the Laravel query builder.
+Se sua aplicação não está usando Eloquent, você pode usar o driver de autenticação `database` que utiliza a query builder do Laravel.
 
 <a name="storing-passwords"></a>
-## Storing Passwords
+## Armazenando Senhas
 
 The Laravel `Hash` class provides secure Bcrypt hashing:
 
@@ -33,9 +33,9 @@ The Laravel `Hash` class provides secure Bcrypt hashing:
 	}
 
 <a name="authenticating-users"></a>
-## Authenticating Users
+## Autenticando Usuários
 
-To log a user into your application, you may use the `Auth::attempt` method.
+Para logar um usuário em sua aplicação, você pode utilizar o método `Auth::attempt`.
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password)))
 	{
@@ -64,19 +64,19 @@ You may add in extra conditions to ensure that the user is (for example) 'active
         // The user is active, not suspended, and exists.
     }
 
-Once a user is authenticated, you may access the User model / record:
+Uma vez que o usuário é autenticado, você pode acessar o model / registro do usuário:
 
-**Accessing The Logged In User**
+**Acessando o usuário logado**
 
 	$email = Auth::user()->email;
 
-To simply log a user into the application by their ID, use the `loginUsingId` method:
+Para simplesmente conectar um usuário na aplicação usando o seu ID, use o método `loginUsingId`:
 
 	Auth::loginUsingId(1);
 
-The `validate` method allows you to validate a user's credentials without actually logging them into the application:
+O método `validate` permite validar as credenciais de um usuário sem realmente registrá-las na aplicação:
 
-**Validating User Credentials Without Login**
+**Validando as credenciais de um usuário sem login**
 
 	if (Auth::validate($credentials))
 	{
@@ -97,7 +97,7 @@ You may also use the `stateless` method to log a user into the application for a
 	Auth::logout();
 
 <a name="protecting-routes"></a>
-## Protecting Routes
+## Protegendo Rotas
 
 Route filters may be used to allow only authenticated users to access a given route. Laravel provides the `auth` filter by default, and it is defined in `app/filters.php`.
 
@@ -124,7 +124,7 @@ Laravel provides an easy method of protecting your application from cross-site r
     }));
 
 <a name="password-reminders-and-reset"></a>
-## Password Reminders & Reset
+## Lembretes de Senhas & Redefinição
 
 ### Sending Password Reminders
 
@@ -221,7 +221,7 @@ If the password reset is successful, the `User` instance and the password will b
 Also, similarly to the `remind` method, if an error occurs while resetting the password, the `reset` method will return a `Redirect` to the current URI with an `error` and `reason`.
 
 <a name="encryption"></a>
-## Encryption
+## Criptografia
 
 Laravel provides facilities for strong AES-256 encryption via the mcrypt PHP extension:
 
