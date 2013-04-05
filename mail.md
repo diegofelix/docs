@@ -21,7 +21,7 @@ O método `Mail::send` pode ser usado para enviar uma mensagem de e-mail:
 
 O primeiro argumento passado para o método `send` é o nome da view que que deverá ser usada como o corpo do e-mail. O segundo é o `$data` que deverá ser passado para a view, e o terceiro é o Closure permitindo que você especifique várias opções na mensagem de e-mail.
 
-> **Note:** A `$message` variable is always passed to e-mail views, and allows the inline embedding of attachments. So, it is best to avoid passing a `message` variable in your view payload.
+> **Nota:** A variavel `$message` é sempre passada para as views de email, e permite a incorporação de anexos. Então, é melhor evitar passar uma variavel `message` para sua view.
 
 Você também pode especificar uma view de texto simples para usar em complemento com uma view HTML:
 
@@ -46,14 +46,14 @@ Ao anexar arquivos para uma mensagem, você pode especificar também um tipo MIM
 
 	$m->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 
-> **Note:** The message instance passed to a `Mail::send` Closure extends the SwiftMailer message class, allowing you to call any method on that class to build your e-mail messages.
+> **Nota:** A instância da mensagem passada para a Closure `Mail::send` extende a classe de mensagem do SwiftMailer, permitindo que você chame qualquer método existente nesta classe para construir seus e-mails.
 
 <a name="embedding-inline-attachments"></a>
 ## Incorporando anexos inline
 
 Incorporar imagens inline em seus e-mails é normalmente complicado; Entretando, Laravel provê uma forma conveniente de anexar imagens em seus e-mails e recuperar o CID apropriado.
 
-**Incorporando uma imagem em uma view de E-Mail**
+**Incorporando uma imagem em uma view de e-mail**
 
 	<body>
 		Here is an image:
@@ -61,7 +61,7 @@ Incorporar imagens inline em seus e-mails é normalmente complicado; Entretando,
 		<img src="<?php echo $message->embed($pathToFile); ?>">
 	</body>
 
-**Incorporando Raw Data em uma view de E-Mail**
+**Incorporando Raw Data em uma view de e-mail**
 
 	<body>
 		Here is an image from raw data:
