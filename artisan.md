@@ -1,36 +1,36 @@
 # Artisan CLI
 
-- [Introduction](#introduction)
-- [Usage](#usage)
+- [Introdução](#introduction)
+- [Modo de usar](#usage)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Artisan is the name of the command-line interface included with Laravel. It provides a number of helpful commands for your use while developing your application. It is driven by the powerful Symfony Console component.
+Artisan e o nome da linha de comando da interface incluido junto ao Laravel. O mesmo provem a numero de comandos de helpers para você utilizar enquanto desenvolve sua aplicação. Além de ser o drive do poderoso Symfony Console. 
 
 <a name="usage"></a>
-## Usage
+## Modo de usar
 
-To view a list of all available Artisan commands, you may use the `list` command:
+Para ver um lista de todos os comandos disponíveis no Artisan, você poderá usar o comando `list`:
 
-**Listing All Available Commands**
+**Lista Todos Os Comandos Disponíveis**
 
 	php artisan list
 
-Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, simply precede the name of the command with `help`:
+Todos os comandos disponhem de uma ajuda atravêz do comando "help" mostrando assim uma tela com a descrição referente ao comando solicitado e seus argumentos e opções. Para mostrar a tela de ajuda, simplesmente informe o comando com o `help`:
 
-**Viewing The Help Screen For A Command**
+**Vizualizando O A Tela De Ajuda Para O Comando**
 
 	php artisan help migrate
 
-You may specify the configuration environment that should be used while running a command using the `--env` switch:
+Você pode especificar a configuração do ambiente que devem ser utilizado enquanto está executando um determinado comando utilizamos o comando `--env`:
 
-**Specifying The Configuration Environment**
+**Especifica A Configuração Do Ambiente**
 
 	php artisan migrate --env=local
 
-You may also view the current version of your Laravel installation using the `--version` option:
+Voce pode também verificar a versão atual do seu Laravel instalado usando a opção `--version`:
 
-**Displaying Your Current Laravel Version**
+**Mostrando A Versão Atual Do Seu Laravel**
 
 	php artisan --version
