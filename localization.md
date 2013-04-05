@@ -3,7 +3,7 @@
 - [Introdução](#introduction)
 - [Arquivos de Idiomas](#language-files)
 - [Uso Básico](#basic-usage)
-- [Plurais](#pluralization)
+- [Pluralização](#pluralization)
 
 <a name="introduction"></a>
 ## Introdução
@@ -45,21 +45,21 @@ O idioma padrão da sua aplicação está definido em `app/config/app.php`. Voc�
 
 	echo Lang::get('messages.welcome');
 
-The first segment of the string passed to the `get` method is the name of the language file, and the second is the name of the line that should be retrieved.
+O primeiro segmento da string passada para o método `get` é o nome do arquivo de idioma, e o segundo é o nome da linha que deve ser retornada.
 
-> **Note*: If a language line does not exist, the key will be returned by the `get` method.
+> **Nota*: Se a linha solicitada não existir, a chave irá ser retornada pelo o método `get`.
 
-**Making Replacements In Lines**
+**Fazendo substituições em linhas**
 
-You may also define place-holders in your language lines:
+Você também pode definir place-holders no seu arquivo de idioma:
 
 	'welcome' => 'Welcome, :name',
 
-Then, pass a second argument of replacements to the `Lang::get` method:
+Em seguida, passe um segundo argumento de substituição para o método `Lang::get`:
 
 	echo Lang::get('messages.welcome', array('name' => 'Dayle'));
 
-**Determine If A Language File Contains A Line**
+**Determina se o arquivo de idioma contém a linha**
 
 	if (Lang::has('messages.welcome'))
 	{
@@ -67,16 +67,16 @@ Then, pass a second argument of replacements to the `Lang::get` method:
 	}
 
 <a name="pluralization"></a>
-## Pluralization
+## Pluralização
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. You may easily manage this in your language files. By using a "pipe" character, you may separate the singular and plural forms of a string:
+Pluralização é um problema complexo, pois línguas diferentes têm uma variedade de regras complexas para a pluralização. Você pode gerenciar isto facilmente no seu arquivo de idioma. Usando o caracter "pipe", você pode separar as formas de singular e plural de uma string:
 
 	'apples' => 'There is one apple|There are many apples',
 
-You may then use the `Lang::choice` method to retrieve the line:
+Você pode utilizar o método `Lang::choice` para retornar a linha:
 
 	echo Lang::choice('messages.apples', 10);
 
-Since the Laravel translator is powered by the Symfony Translation component, you may also create more explicit pluralization rules easily:
+Como o tradutor do Laravel é construido em cima do componente Symfony Translation, você pode também criar mais regras de pluralização explícitas facilmente:
 
 	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',
