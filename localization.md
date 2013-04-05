@@ -29,7 +29,7 @@ Os arquivos de idioma simplesmente retornam um vetor com o texto traduzido assoc
 	<?php
 
 	return array(
-		'welcome' => 'Welcome to our application'
+		'welcome' => 'Bem-vindo a sua aplicação!'
 	);
 
 O idioma padrão da sua aplicação está definido em `app/config/app.php`. Você pode alterar o idioma ativo a qualquer momento usando o método `App::setLocale`:
@@ -45,21 +45,21 @@ O idioma padrão da sua aplicação está definido em `app/config/app.php`. Voc�
 
 	echo Lang::get('messages.welcome');
 
-The first segment of the string passed to the `get` method is the name of the language file, and the second is the name of the line that should be retrieved.
+A primeira parte da string passada para o método `get` é o nome do arquivo do idioma e o segundo é o texto a ser traduzido.
 
-> **Note*: If a language line does not exist, the key will be returned by the `get` method.
+> **Nota*: Se uma tradução não existir, o método `get` retornará o valor chave original.
 
-**Making Replacements In Lines**
+**Realizando substituições em um texto à ser traduzido**
 
-You may also define place-holders in your language lines:
+Você pode definir valores a serem interpretados em uma linha de tradução:
 
-	'welcome' => 'Welcome, :name',
+	'welcome' => 'Bem-vindo, :name',
 
-Then, pass a second argument of replacements to the `Lang::get` method:
+E então passar como um segundo argumento no método `Lang::get` o valor a ser substituído:
 
 	echo Lang::get('messages.welcome', array('name' => 'Dayle'));
 
-**Determine If A Language File Contains A Line**
+**Verificando se um arquivo de tradução possui linhas**
 
 	if (Lang::has('messages.welcome'))
 	{
@@ -67,16 +67,16 @@ Then, pass a second argument of replacements to the `Lang::get` method:
 	}
 
 <a name="pluralization"></a>
-## Pluralization
+## Plurais
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. You may easily manage this in your language files. By using a "pipe" character, you may separate the singular and plural forms of a string:
+Palavras em plural são um problema complexo, pois cada idioma possui uma variedade de regras complexas para estes casos. Você pode gerenciá-los de uma maneira simples. Usando o "|" é possível separar a forma singular e plural de um texto:
 
-	'apples' => 'There is one apple|There are many apples',
+	'apples' => 'Existe uma maça|Existem várias maças',
 
-You may then use the `Lang::choice` method to retrieve the line:
+Você também pode usar o método `Lang::choice` para recuperar uma linha de tradução:
 
 	echo Lang::choice('messages.apples', 10);
 
-Since the Laravel translator is powered by the Symfony Translation component, you may also create more explicit pluralization rules easily:
+Como a tradução do Laravel é provida pelo componente Symfony Translation, você também pode criar regras de plurais explicitas facilmente:
 
-	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',
+	'apples' => '{0} Não há nenhum|[1,19] Há alguns|[20,Inf] Há muitos',
