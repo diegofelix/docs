@@ -45,7 +45,7 @@ Vários dos caminhos de diretório do framework são configuráveis. Para mudar 
 
 O framework vem com o arquivo `public/.htaccess` que é utilizado para permitir URLs sem `index.php`. Se você usa o Apache na sua aplicação do Laravel, esteja certo de ativar o módulo `mod_rewrite`.
 
-Se o arquivo `.htaccess` que vem com o Laravel não funcione com sua instalação do Apache, tente este outro:
+Se o arquivo `.htaccess` que vem com o Laravel não funcionar com sua instalação do Apache, tente este outro:
 
 	Options +FollowSymLinks
 	RewriteEngine on
