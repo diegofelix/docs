@@ -1,32 +1,32 @@
-# Errors & Logging
+# Erros & Logging
 
-- [Error Detail](#error-detail)
-- [HTTP Exceptions](#http-exceptions)
-- [Handling Errors](#handling-errors)
-- [Handling 404 Errors](#handling-404-errors)
+- [Detalhes de Erros](#error-detail)
+- [Exceções HTTP](#http-exceptions)
+- [Tratando Erros](#handling-errors)
+- [Tratando Erros 404](#handling-404-errors)
 - [Logging](#logging)
 
-## Error Detail
+## Detalhes de erros
 
-By default, error detail is enabled for your application. This means that when an error occurs you will be showed an error page with a detailed stack trace and error message. You may turn off error details by setting the `debug` option in your `app/config/app.php` file to `false`. **It is strongly recommended that you turn off error detail in a production environment.**
+Por padrão, dealhes de erros estão ativados para sua aplicação. Isso significa que quando um erro ocorre é exibida uma página com detalhes e uma mensagem do erro. Você pode desativar detalhes de erros configurando a opção `debug` no arquivo `app/config/app.php` para `false`. **É altamente recomendado que você desative os detalhes de erros em um ambiente de produção.**
 
-## Handling Errors
+## Tratando Erros
 
-By default, the `app/start/global.php` file contains an error handler for all exceptions:
+Por padrão, o arquivo `app/start/global.php` contém um manipulador de erro para todas as exceções:
 
 	App::error(function(Exception $exception)
 	{
 		Log::error($exception);
 	});
 
-This is the most basic error handler. However, you may specify more handlers if needed. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
+Este é o manipulador de erro mais básico. Contudo, você pode especificar mais manipuladores se necessário. Handlers are called based on the type-hint of the Exception they handle. Por exemplo, você pode criar um manipulador que somente manipula instâncias de `RuntimeException`:
 
 	App::error(function(RuntimeException $exception)
 	{
 		// Handle the exception...
 	});
 
-If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
+Se um manipulador de exceção retorna uma resposta, aquela resposta será enviada para o browser e nenhum outro manipulador será chamado:
 
 	App::error(function(InvalidUserException $exception)
 	{
@@ -35,7 +35,7 @@ If an exception handler returns a response, that response will be sent to the br
 		return 'Sorry! Something is wrong with this account!';
 	});
 
-To listen for PHP fatal errors, you may use the `App::fatal` method:
+Para monitorar erros fatais no PHP, você pode utilizar o método `App::fatal`:
 
 	App::fatal(function($exception)
 	{
@@ -43,24 +43,24 @@ To listen for PHP fatal errors, you may use the `App::fatal` method:
 	});
 
 <a name="http-exceptions"></a>
-## HTTP Exceptions
+## Exceções HTTP
 
-Exceptions in respect to HTTP, refer to errors that may occur during a client request. This may be a page not found error (404), an authorized error (401) or even a generated 500 error. In order to return such a response, use the following:
+Exceções em relação ao HTTP, referem-se a erros que podem ocorrer durante uma solicitação do cliente. Pode ser um erro de página não encontrada (404), um erro de autorização (401) ou até mesmo um erro 500. Para retornar tal resposta, utilize o seguinte:
 
 	App::abort(404, 'Page not found');
 
-The first argument, is the HTTP status code, with the following being a custom message you'd like to show with the error.
+O primeiro argumento, é o código de status HTTP, com o seguinte argumento sendo uma mensagem personalizada que você gostaria de mostrar com o erro.
 
-In order to raise a 401 Unauthorized exception, just do the following:
+A fim de levantar uma exceção de 401 não autorizado, basta fazer o seguinte:
 
 	App::abort(401, 'You are not authorized.');
 
-These exceptions can be executed at any time during the request's lifecycle.
+Estas exceções podem ser executadas em qualquer momento durante o ciclo de vida da requisição.
 
 <a name="handling-404-errors"></a>
-## Handling 404 Errors
+## Tratando Erros 404
 
-You may register an error handler that handles all "404 Not Found" errors in your application, allowing you to return custom 404 error pages:
+Você pode registrar um manipulador de erro que manipula todos os erros de "404 Not Found" da sua aplicação, permitindo retornar páginas de erro 404 personalizadas:
 
 	App::missing(function($exception)
 	{
