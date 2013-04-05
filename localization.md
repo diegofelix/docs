@@ -1,19 +1,19 @@
-# Localization
+# Localização
 
-- [Introduction](#introduction)
-- [Language Files](#language-files)
-- [Basic Usage](#basic-usage)
-- [Pluralization](#pluralization)
+- [Introdução](#introduction)
+- [Arquivos de Idiomas](#language-files)
+- [Uso Básico](#basic-usage)
+- [Plurais](#pluralization)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-The Laravel `Lang` class provides a convenient way to retrieving strings in various languages, allowing you to easily support multiple languages within your application.
+A classe `Lang` provê uma forma conveniente de recuperar textos em vários idiomas, permitindo sua aplicação suportar vários idiomas de maneira muito simples.
 
 <a name="language-files"></a>
-## Language Files
+## Arquivos de Idiomas
 
-Language strings are stored in files within the `app/lang` directory. Within this directory this should be a directory for each language supported by the application.
+Os textos de cada idioma estão armazenados nos arquivos localizados no diretório `app/lang`. Este diretório deve conter um diretório para cada idioma suportado pela sua aplicação.
 
 	/app
 		/lang
@@ -22,9 +22,9 @@ Language strings are stored in files within the `app/lang` directory. Within thi
 			/es
 				messages.php
 
-Language files simply return an array of keyed strings. For example:
+Os arquivos de idioma simplesmente retornam um vetor com o texto traduzido associado a uma chave. Exemplo:
 
-**Example Language File**
+**Exemplo de um arquivo de idioma**
 
 	<?php
 
@@ -32,16 +32,16 @@ Language files simply return an array of keyed strings. For example:
 		'welcome' => 'Welcome to our application'
 	);
 
-The default language for your application is stored in the `app/config/app.php` configuration file. You may change the active language at any time using the `App::setLocale` method:
+O idioma padrão da sua aplicação está definido em `app/config/app.php`. Você pode alterar o idioma ativo a qualquer momento usando o método `App::setLocale`:
 
-**Changing The Default Language At Runtime**
+**Alterando o idioma ativo em tempo de execução**
 
 	App::setLocale('es');
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso Básico
 
-**Retrieving Lines From A Language File**
+**Recuperando linhas do arquivo de idioma**
 
 	echo Lang::get('messages.welcome');
 
