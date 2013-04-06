@@ -1,24 +1,25 @@
-# Controllers
+# Controladores
 
-- [Basic Controllers](#basic-controllers)
-- [Controller Filters](#controller-filters)
-- [RESTful Controllers](#restful-controllers)
-- [Resource Controllers](#resource-controllers)
-- [Handling Missing Methods](#handling-missing-methods)
+- [Controladores Básicos](#basic-controllers)
+- [Filtros de Controladores](#controller-filters)
+- [Controladores RESTful](#restful-controllers)
+- [Controladores de Recursos](#resource-controllers)
+- [Resolvendo Métodos Ausentes](#handling-missing-methods)
 
 <a name="basic-controllers"></a>
-## Basic Controllers
+## Controladores Básicos
 
-Instead of defining all of your route-level logic in a single `routes.php` file, you may wish to organize this behavior using Controller classes. Controllers can group related route logic into a class, as well as take advantage of more advanced framework features such as automatic [dependency injection](/docs/ioc).
+Em vez de definir toda a sua lógica de rotas no arquivo de `routes.php`, você pode querer organizar este comportamento usando classes Controladores. Controladores podem agrupar a lógica relacionada a rota em uma classe, além de tirar vantagem de recursos mais avançados em Laravel, tais como [injeção de dependência](/docs/ioc) automática.
 
-Controllers are typically stored in the `app/controllers` directory, and this directory is registered in the `classmap` option of your `composer.json` file by default.
+Os controladores são normalmente armazenados no diretório `app/controllers`, e este diretório já vem predefinidp na opção `classmap` de seu arquivo `composer.json`.
 
-Here is an example of a basic controller class:
+Abaixo segue um exemplo de uma classe de Controlador Básico:
+
 
 	class UserController extends BaseController {
 
 		/**
-		 * Show the profile for the given user.
+		 * Mostrar o perfil de um usuário.
 		 */
 		public function showProfile($id)
 		{
@@ -29,41 +30,41 @@ Here is an example of a basic controller class:
 
 	}
 
-All controllers should extend the `BaseController` class. The `BaseController` is also stored in the `app/controllers` directory, and may be used as a place to put shared controller logic. The `BaseController` extends the framework's `Controller` class. Now, We can route to this controller action like so:
+Todos controladores deve extender a classe `BaseController`. O `BaseController` é armazenado no diretório `app/controllers`, onde a lógica compartilhada em controladores pode ser colocada. A classe `BaseController` extende a classe `Controller` da framework. Agora podemos encaminhar a ação do controlador:
 
 	Route::get('user/{id}', 'UserController@showProfile');
 
-If you choose to nest or organize your controller using PHP namespaces, simply use the fully qualified class name when defining the route:
+Se você escolher organizar seu controlador usando PHP namespaces, basta usar o nome da classe com o namespace correspondente para definir a rota:
 
 	Route::get('foo', 'Namespace\FooController@method');
 
-You may also specify names on controller routes:
+Você também pode especificar nomes em rotas de controlador:
 
 	Route::get('foo', array('uses' => 'FooController@method',
 											'as' => 'name'));
 
-To generate a URL to a controller action, you may use the `URL::action` method:
+Para gerar uma URL para uma ação de controlador, você pode usar o método `URL::action`:
 
 	$url = URL::action('FooController@method');
 
-You may access the name of the controller action being run using the `currentRouteAction` method:
+Você pode acessar o nome da ação do controlador que está sendo executado com o método `currentRouteAction`:
 
 	$action = Route::currentRouteAction();
 
 <a name="controller-filters"></a>
-## Controller Filters
+## Filtros de Controladores
 
-[Filters](/docs/routing#route-filters) may be specified on controller routes similar to "regular" routes:
+Os [filtros](/docs/routing#route-filters) podem ser especificados em rotas controladoras semelhantes às rotas regulares:
 
 	Route::get('profile', array('before' => 'auth',
 				'uses' => 'UserController@showProfile'));
 
-However, you may also specify filters from within your controller:
+No entanto, você também pode especificar filtros de dentro de seu controlador:
 
 	class UserController extends BaseController {
 
 		/**
-		 * Instantiate a new UserController instance.
+		 * Instanciar uma nova instância de UserController.
 		 */
 		public function __construct()
 		{
@@ -77,12 +78,12 @@ However, you may also specify filters from within your controller:
 
 	}
 
-You may also specify controller filters inline using a Closure:
+Você também pode especificar filtros de controladorers usando funções anônimas (Closures):
 
 	class UserController extends BaseController {
 
 		/**
-		 * Instantiate a new UserController instance.
+		 * Instanciar uma nova instância de UserController.
 		 */
 		public function __construct()
 		{
@@ -95,15 +96,16 @@ You may also specify controller filters inline using a Closure:
 	}
 
 <a name="restful-controllers"></a>
-## RESTful Controllers
+## Controladores RESTful
 
-Laravel allows you to easily define a single route to handle every action in a controller using simple, REST naming conventions. First, define the route using the `Route::controller` method:
+Laravel permite que você facilmente defina uma única rota para lidar com cada ação em um controlador usando simples, convenções de nomenclatura de REST. Primeiro defina uma rota usando o método `Route::controller`:
 
-**Defining A RESTful Controller**
+
+**Definindo um Controlador RESTful**
 
 	Route::controller('users', 'UserController');
 
-The `controller` method accepts two arguments. The first is the base URI the controller handles, while the second is the class name of the controller. Next, just add methods to your controller, prefixed with the HTTP verb they respond to:
+O método `controller` aceita dois argumentos. O primeiro é a URI base que controlador manipula, enquanto o segundo é o nome da classe do controlador. Em seguida, basta adicionar métodos em seu controlador, prefixado com o verbo HTTP que eles respondem:
 
 	class UserController extends BaseController {
 
@@ -119,30 +121,32 @@ The `controller` method accepts two arguments. The first is the base URI the con
 
 	}
 
-The `index` methods will respond to the root URI handled by the controller, which, in this case, is `users`.
+O método `index` irá responder ao URI raiz implementado pelo controlador que, neste caso, é `users`.
 
-If your controller action contains multiple words, you may access the action using "dash" syntax in the URI. For example, the following controller action on our `UserController` would respond to the `users/admin-profile` URI:
+Se a ação do sue controlador contém múltiplas palavras, você pode acessar a ação usando traços na sintaxe na URI. Por exemplo, a ação de controlador no nosso `UserController` responderia a URI `users/admin-profile` da seguinte forma:
 
 	public function getAdminProfile() {}
 
 <a name="resource-controllers"></a>
-## Resource Controllers
+## Controladores de Recursos
 
-Resource controllers make it easier to build RESTful controllers around resources. For example, you may wish to create a controller that manages "photos" stored by your application. Using the `controller:make` command via the Artisan CLI and the `Route::resource` method, we can quickly create such a controller.
+Controladores de recursos tornam mais fácil para construir controladores RESTful em torno de recursos. Por exemplo, você pode desejar criar um controlador que gerencia "photos" armazenadas pelo seu aplicativo. Usando o comando `controller:make` através do Artisan CLI e o método `Route::resource`, podemos criar rapidamente tal controlador.
 
-To create the controller via the command line, execute the following command:
+Para criar o controlador via linha de comando, execute o seguinte comando:
 
 	php artisan controller:make PhotoController
 
-Now we can register a resourceful route to the controller:
+Agora podemos registar uma rota de recursos para o controlador:
 
 	Route::resource('photo', 'PhotoController');
 
 This single route declaration creates multiple routes to handle a variety of RESTful actions on the photo resource. Likewise, the generated controller will already have stubbed methods for each of these actions with notes informing you which URIs and verbs they handle.
+Esta única declaração cria múltiplas rotas para lidar com uma variedade de ações RESTful no recurso de "photos". Da mesma forma, o controlador gerado já terá métodos preparados para cada uma dessas ações com anotações informando quais URIs e verbos lidam com eles.
 
-**Actions Handled By Resource Controller**
 
-Verb      | Path                  | Action
+**Ações tratadas por Controlador de Recursos**
+
+Verso     | Caminho               | Ação
 ----------|-----------------------|--------------
 GET       | /resource             | index
 GET       | /resource/create      | create
@@ -152,23 +156,25 @@ GET       | /resource/{id}/edit   | edit
 PUT/PATCH | /resource/{id}        | update
 DELETE    | /resource/{id}        | destroy
 
-Sometimes you may only need to handle a subset of the resource actions:
+Às vezes, você só precisa lidar com um subconjunto das ações de recursos:
 
 	php artisan controller:make PhotoController --only=index,show
 
 	php artisan controller:make PhotoController --except=index
 
-And, you may also specify a subset of actions to handle on the route:
+Você também pode especificar um subconjunto de ações para lidar com a rota:
 
 	Route::resource('photo', 'PhotoController',
 					array('only' => array('index', 'show')));
 
 <a name="handling-missing-methods"></a>
-## Handling Missing Methods
+## Resolvendo Métodos Ausentes
 
 A catch-all method may be defined which will be called when no other matching method is found on a given controller. The method should be named `missingMethod`, and receives the parameter array for the request as its only argument:
 
-**Defining A Catch-All Method**
+A pega-tudo método pode ser definido, que será chamada quando nenhum outro correspondente método é encontrado em um determinado controlador. O método deve ser chamado `missingMethod`, e recebe "the parameter array for the request" como seu único argumento:
+
+**Definindo um Pega-Tudo Método**
 
 	public function missingMethod($parameters)
 	{
