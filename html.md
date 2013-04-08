@@ -33,7 +33,7 @@ Você pode abrir formulários que apontam para rotas nomeadas ou actions de cont
 	echo Form::open(array('action' => 'Controller@method'))
 
 If your form is going to accept file uploads, add a `files` option to your array:
-Se seu formulário irá aceitar upload de arquivos, adicione um item `files` na array de opções.
+Se seu formulário for aceitar upload de arquivos, adicione uma opção `files` ao seu array:
 
 	echo Form::open(array('url' => 'foo/bar', 'files' => true))
 
@@ -75,12 +75,12 @@ Agora, quando você gerar um elemento no formulário, como um input text, os val
 This allows you to quickly build forms that not only bind to model values, but easily re-populate if there is a validation error on the server!
 Isso permite você criar rapidamente formulários que não apenas linkan com os valores dos Models, mas também repopulam caso haja um erro de validação no servidor!
 
-> **Nota:** Quando estiverem usando o `Form::model`, não esquecam de fechar o formulário usando o `Form::close`!
+> **Nota:** Quando estiverem usando o `Form::model`, não esqueçam de fechar o formulário usando o `Form::close`!
 
 <a name="labels"></a>
 ## Labels
 
-**Criando um elemento Lable**
+**Criando um elemento Label**
 
 	echo Form::label('email', 'E-Mail Address');
 
@@ -152,17 +152,17 @@ Isso permite você criar rapidamente formulários que não apenas linkan com os 
 <a name="custom-macros"></a>
 ## Macros personalizadas
 
-É fácil definir seus próprios elementos chamados de "macros". Veja como funciona. Primeiro, simplesmente registre o macro com o seu devido nome e uma Closure.
+É fácil definir seus próprios elementos chamados de "macros". Veja como funciona. Primeiro, simplesmente registre a macro com o seu devido nome e uma Closure.
 
-**Registrando um Macro de formulário**
+**Registrando uma Macro de formulário**
 
 	Form::macro('myField', function()
 	{
 		return '<input type="awesome">';
 	});
 
-Agora você pode chamar seu macro usando o seu nome:
+Agora você pode chamar sua macro usando o seu nome:
 
-**Chamando um macro personalizado**
+**Chamando uma macro personalizada**
 
 	echo Form::myField();
