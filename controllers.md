@@ -11,7 +11,7 @@
 
 Em vez de definir toda a sua lógica de rotas no arquivo `routes.php`, você pode querer organizar este comportamento usando Controllers. Controllers podem agrupar a lógica relacionada a rota em uma classe, além de tirar vantagem de recursos mais avançados em Laravel, tais como [injeção de dependência](/docs/ioc) automática.
 
-Os Controllers são normalmente armazenados no diretório `app/controllers`, e este diretório já vem predefinidp na opção `classmap` de seu arquivo `composer.json`.
+Os Controllers são normalmente armazenados no diretório `app/controllers`, e este diretório já vem predefinido na opção `classmap` de seu arquivo `composer.json`.
 
 Abaixo segue um exemplo de um Controller Básico:
 
@@ -30,7 +30,7 @@ Abaixo segue um exemplo de um Controller Básico:
 
 	}
 
-Todo Controller deve extender a classe `BaseController`. O `BaseController` é armazenado no diretório `app/controllers`, onde a lógica compartilhada entra Controllers pode ser colocada. A classe `BaseController` extende a classe `Controller` do framework. Agora podemos encaminhar a action do Controller:
+Todo Controller deve estender a classe `BaseController`. O `BaseController` é armazenado no diretório `app/controllers`, onde a lógica compartilhada entre Controllers pode ser colocada. A classe `BaseController` estende a classe `Controller` do framework. Agora podemos encaminhar a action do Controller:
 
 	Route::get('user/{id}', 'UserController@showProfile');
 
@@ -105,7 +105,7 @@ Laravel permite que você facilmente defina uma única rota para lidar com cada 
 
 	Route::controller('users', 'UserController');
 
-O método `controller` aceita dois argumentos. O primeiro é a URI base que Controller manipulará, enquanto o segundo é o nome da classe do Controller. Em seguida, basta adicionar métodos em seu Controller, prefixado com o verbo HTTP que eles respondem:
+O método `controller` aceita dois argumentos. O primeiro é a URI base que o Controller manipulará, enquanto o segundo é o nome da classe do Controller. Em seguida, basta adicionar métodos em seu Controller, prefixado com o verbo HTTP que eles respondem:
 
 	class UserController extends BaseController {
 
