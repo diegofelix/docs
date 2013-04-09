@@ -98,7 +98,7 @@ Você também pode especificar filtros de Controllers usando Closures:
 <a name="restful-controllers"></a>
 ## Controllers RESTful
 
-Laravel permite que você facilmente defina uma única rota para lidar com cada action em um Controller usando simples convenções de nomenclatura de REST. Primeiro defina uma rota usando o método `Route::controller`:
+Laravel permite que você defina facilmente uma única rota para lidar com cada action em um Controller usando simples convenções de nomenclatura de REST. Primeiro defina uma rota usando o método `Route::controller`:
 
 
 **Definindo um Controller RESTful**

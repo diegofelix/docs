@@ -67,7 +67,7 @@ E então passar como um segundo argumento no método `Lang::get` o valor a ser s
 	}
 
 <a name="pluralization"></a>
-## Plurais
+## Pluralização
 
 Palavras no plural são um problema complexo, pois cada idioma possui uma variedade de regras complexas para estes casos. Você pode gerenciá-las de uma maneira simples. Usando o "|" é possível separar a forma singular e plural de um texto:
 

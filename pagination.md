@@ -35,7 +35,7 @@ O argumento passado para o método `paginate` é o número de itens que você de
 
 	<?php echo $users->links(); ?>
 
-Isso é tudo o que é preciso para criar um sistema de paginação! Observe que não precisamos informar ao framework a página atual. Laravel var determinar isso para você automáticamente.
+Isso é tudo o que é preciso para criar um sistema de paginação! Observe que não precisamos informar ao framework a página atual. Laravel vai determinar isso para você automaticamente.
 
 As vezes você deseja criar os links de paginação manualmente, passando um array de itens. Você pode fazer isto usando o método `Paginator::make`:
 

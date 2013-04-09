@@ -19,7 +19,7 @@ O método `Mail::send` pode ser usado para enviar uma mensagem de e-mail:
 		$m->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-O primeiro argumento passado para o método `send` é o nome da view que que deverá ser usada como o corpo do e-mail. O segundo é o `$data` que deverá ser passado para a view, e o terceiro é o Closure permitindo que você especifique várias opções na mensagem de e-mail.
+O primeiro argumento passado para o método `send` é o nome da view que deverá ser usada como o corpo do e-mail. O segundo é o `$data` que deverá ser passado para a view, e o terceiro é o Closure permitindo que você especifique várias opções na mensagem de e-mail.
 
 > **Nota:** A variavel `$message` é sempre passada para as views de email, e permite a incorporação de anexos. Então, é melhor evitar passar uma variavel `message` para sua view.
 
@@ -46,7 +46,7 @@ Ao anexar arquivos para uma mensagem, você pode especificar também um tipo MIM
 
 	$m->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 
-> **Nota:** A instância da mensagem passada para a Closure `Mail::send` extende a classe de mensagem do SwiftMailer, permitindo que você chame qualquer método existente nesta classe para construir seus e-mails.
+> **Nota:** A instância da mensagem passada para a Closure `Mail::send` estende a classe de mensagem do SwiftMailer, permitindo que você chame qualquer método existente nesta classe para construir seus e-mails.
 
 <a name="embedding-inline-attachments"></a>
 ## Incorporando anexos inline

@@ -32,7 +32,6 @@ Você pode abrir formulários que apontam para rotas nomeadas ou actions de cont
 
 	echo Form::open(array('action' => 'Controller@method'))
 
-If your form is going to accept file uploads, add a `files` option to your array:
 Se seu formulário for aceitar upload de arquivos, adicione uma opção `files` ao seu array:
 
 	echo Form::open(array('url' => 'foo/bar', 'files' => true))
@@ -40,9 +39,7 @@ Se seu formulário for aceitar upload de arquivos, adicione uma opção `files` 
 <a name="csrf-protection"></a>
 ## Proteção contra CSRF
 
-Laravel provides an easy method of protecting your application from cross-site request forgeries. First, a random token is placed in your user's session. Don't sweat it, this is done automatically. Next, use the token method to generate a hidden form input field containing the random token on your form:
-
-Laravel oferece uma forma fácil de proteger sua aplicação contra CSRF ( cross-site request forgery ). Primeiro, um token aleatório será adicionado na sessão do seu usuário. Não se preocupe, isso é feito automaticamente. Em seguida, use o método token para gerar um input hidden contendo o token no seu formulário.
+Laravel oferece uma forma fácil de proteger sua aplicação contra CSRF (cross-site request forgery). Primeiro, um token aleatório será adicionado na sessão do seu usuário. Não se preocupe, isso é feito automaticamente. Em seguida, use o método token para gerar um input hidden contendo o token no seu formulário:
 
 **Adicionando o Token CSRF em um formulário**
 
@@ -64,16 +61,13 @@ Muitas vezes, você vai querer popular um formulário baseado nos dados de um Mo
 
 	echo Form::model($user, array('route' => 'user.update'))
 
-Now, when you generate a form element, like a text input, the model's value matching the field's name will automatically be set as the field value. So, for example, for a text input named `email`, the user model's `email` attribute would be set as the value. However, there's more! If there is an item in the Session flash data matching the input name, that will take precedence over the model's value. So, the priority looks like this:
-
 Agora, quando você gerar um elemento no formulário, como um input text, os valores do model correspondentes aos campos do formulário serão automaticamente setados aos seus respectivos valores. Por exemplo, para um input text chamado `email`, o atributo do User Model `email` será setado no valor do campo. Porém, tem mais! Se há um item na `Flash data` da Sessão correspondente ao nome do input, ele irá prevalecer sobre o valor do Model. Então, a regra é a seguinte:
 
 1. `Flash Data` da Sessão (Input antigo)
 2. Valor passado explicitamente
 3. Dado do atributo do Model
 
-This allows you to quickly build forms that not only bind to model values, but easily re-populate if there is a validation error on the server!
-Isso permite você criar rapidamente formulários que não apenas linkan com os valores dos Models, mas também repopulam caso haja um erro de validação no servidor!
+Isso permite você criar rapidamente formulários que não apenas vinulam com os valores dos Models, mas também repopulam caso haja um erro de validação no servidor!
 
 > **Nota:** Quando estiverem usando o `Form::model`, não esqueçam de fechar o formulário usando o `Form::close`!
 
@@ -88,9 +82,7 @@ Isso permite você criar rapidamente formulários que não apenas linkan com os 
 
 	echo Form::label('email', 'E-Mail Address', array('class' => 'awesome'));
 
-> **Note:** After creating a label, any form element you create with a name matching the label name will automatically receive an ID matching the label name as well.
-
-> **Nota:** Depois de criar o label, qualquer elemento que você criar que corresponda ao nome do label automaticamente receberá um id com o mesmo nome do label.
+> **Nota:** Depois de criar o label, qualquer elemento que você criar que corresponda ao nome do label automaticamente receberá um ID com o mesmo nome do label.
 
 <a name="text"></a>
 ## Text, Text Area, Password & Hidden
@@ -132,11 +124,11 @@ Isso permite você criar rapidamente formulários que não apenas linkan com os 
 <a name="drop-down-lists"></a>
 ## Drop-Downs
 
-**Generating A Drop-Down List**
+**Criando uma lista Drop-Down**
 
 	echo Form::select('size', array('L' => 'Large', 'S' => 'Small'));
 
-**Generating A Drop-Down List With Selected Default**
+**Criando uma lista Drop-Down com um valor selecionado por padrão**
 
 	echo Form::select('size', array('L' => 'Large', 'S' => 'Small'), 'S');
 
