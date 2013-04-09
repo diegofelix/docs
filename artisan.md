@@ -31,6 +31,6 @@ Você pode especificar o ambiente de configuração que devem ser utilizados dur
 
 Você pode ver a versão atual da sua instalação do Laravel usando a opção `--version`:
 
-**Exibindo sua versão atual Laravel**
+**Exibindo sua versão atual do Laravel**
 
 	php artisan --version
