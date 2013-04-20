@@ -1,13 +1,13 @@
-# Contributing To Laravel
+# Contribuindo para Laravel
 
-- [Introduction](#introduction)
+- [Introdução](#introduction)
 - [Pull Requests](#pull-requests)
 - [Coding Guidelines](#coding-guidelines)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Laravel is free, open-source software, meaning anyone can contribute to its development and progress. Laravel source code is currently hosted on [Github](http://github.com), which provides an easy method for forking the project and merging your contributions.
+Laravel é gratuito, open-source, ou seja, qualquer um pode contribuir para o seu desenvolvimento e progresso. O código fonte do Laravel está hospedado no [Github](http://github.com), que fornece um método fácil para dar fork no projeto e mesclar suas contribuições.
 
 <a name="pull-requests"></a>
 ## Pull Requests
@@ -16,17 +16,17 @@ The pull request process differs for new features and bugs. Before sending a pul
 
 Pull requests for bugs may be sent without creating any proposal issue. If you believe that you know of a solution for a bug that has been filed on Github, please leave a comment detailing your proposed fix.
 
-### Feature Requests
+### Pedidos de Funcionalidades
 
-If you have an idea for a new feature you would like to see added to Laravel, you may create an issue on Github with `[Request]` in the title. The feature request will then be reviewed by a core contributor.
+Se você tem uma idéia para uma nova funcionalidade que você gostaria de ver adicionada ao Laravel, você pode criar um issue no Github com `[Request]` no título. O pedido irá ser revisado por um colaborador do projeto.
 
 <a name="coding-guidelines"></a>
 ## Coding Guidelines
 
-Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. In addition to these standards, below is a list of other coding standards that should be followed:
+Laravel segue o padrão de desenvolvimento [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) e [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md). Em adição a essas normas, a seguir está uma lista de outros padrões de desenvolvimentos que devem ser seguidos:
 
-- Namespace declarations should be on the same line as `<?php`.
+- Declarações de Namespace devem estar na mesma linha que `<?php`.
 - Class opening `{` should be on the same line as the class name.
 - Function and control structure opening `{` should be on a separate line.
-- Always use `and` and `or`. Never use `&&` or `||`.
-- Interface names are suffixed with `Interface` (`FooInterface`)
+- Sempre utilize `and` e `or`. Nunca use `&&` ou `||`.
+- Nomes de Interfaces sempre com o sufixo `Interface` (`FooInterface`)

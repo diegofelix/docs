@@ -1,87 +1,87 @@
 # Validation
 
-- [Basic Usage](#basic-usage)
-- [Working With Error Messages](#working-with-error-messages)
-- [Error Messages & Views](#error-messages-and-views)
-- [Available Validation Rules](#available-validation-rules)
-- [Custom Error Messages](#custom-error-messages)
-- [Custom Validation Rules](#custom-validation-rules)
+- [Uso básico](#basic-usage)
+- [Trabalhando com mensagens de erro](#working-with-error-messages)
+- [Mensagens de erros & Views](#error-messages-and-views)
+- [Regras de validação disponíves](#available-validation-rules)
+- [Mensagens de erros personalizadas](#custom-error-messages)
+- [Regras de validação personalizadas](#custom-validation-rules)
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso básico
 
-Laravel ships with a simple, convenient facility for validating data and retrieving validation error messages via the `Validation` class.
+Laravel vem com uma simples, conveniente facilidade para validar dados e retornar mensagens de erro de validação através da classe `Validation`.
 
-**Basic Validation Example**
+**Exemplo básico de validação**
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
 		array('name' => 'required|min:5')
 	);
 
-The first argument passed to the `make` method is the data under validation. The second argument is the validation rules that should be applied to the data.
+O primeiro argumento passado para o método `make` são os dados a serem validados. O segundo argumento é a regra de validação que deverá ser aplicada a estes dados.
 
-Multiple rules may be delimited using either a "pipe" character, or as separate elements of an array.
+Várias regras podem ser delimitadas utilizando ou o caracter "pipe", ou um array de elementos separados.
 
-**Using Arrays To Specify Rules**
+**Utilizando arrays para especificar regras**
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
 		array('name' => array('required', 'min:5'))
 	);
 
-Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
+Uma vez que a instância do `Validator` foi criada, o método `fails` (ou `passes`) pode ser usado para realizar a validação.
 
 	if ($validator->fails())
 	{
 		// The given data did not pass validation
 	}
 
-If validation has failed, you may retrieve the error messages from the validator.
+Se a validação falhar, você pode recuperar as mensagens de erro do validador.
 
 	$messages = $validator->messages();
 
-**Validating Files**
+**Validando arquivos**
 
-The `Validator` class provides several rules for validating files, such as `size`, `mimes`, and others. When validating files, you may simply pass them into the validator with your other data.
+A classe `Validator` fornece várias regras para validar arquivos, como 'tamanho', 'mimes' e outros. Ao validar arquivos, você pode simplesmente passá-los para o validador com os outros dados.
 
 <a name="working-with-error-messages"></a>
-## Working With Error Messages
+## Trabalhando com mensagens de erro
 
-After calling the `messages` method on a `Validator` instance, you will receive a `MessageBag` instance, which has a variety of convenient methods for working with error messages.
+Após chamar o método `messages` na instância do `Validator`, você irá receber uma instância da classe `MessageBag`, que tem uma variedade de métodos para trabalhar com mensagens de erros.
 
-**Retrieving The First Error Message For A Field**
+**Recuperando a primeira mensagem de erro de um campo**
 
 	echo $messages->first('email');
 
-**Retrieving All Error Messages For A Field**
+**Recuperando todas as mensagens de erros de um campo**
 
 	foreach ($messages->get('email') as $message)
 	{
 		//
 	}
 
-**Retrieving All Error Messages For All Fields**
+**Recuperando todas mensagens de erros de todos os campos**
 
 	foreach ($messages->all() as $message)
 	{
 		//
 	}
 
-**Determining If Messages Exist For A Field**
+**Verificando se uma mensagem de um campo existe**
 
 	if ($messages->has('email'))
 	{
 		//
 	}
 
-**Retrieving An Error Message With A Format**
+**Recuperando uma mensagem de erro com formatação**
 
 	echo $messages->first('email', '<p>:message</p>');
 
-> **Note:** By default, messages are formatted using Bootstrap compatible syntax.
+> **Nota:** Por padrão, mensagens são formatadas utilizando a sintaxe compatível com o Bootstrap.
 
-**Retrieving All Error Messages With A Format**
+**Recuperando todas as mensagens de erros com formatação**
 
 	foreach ($messages->all('<li>:message</li>') as $message)
 	{
@@ -89,9 +89,9 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 	}
 
 <a name="error-messages-and-views"></a>
-## Error Messages & Views
+## Mensagens de erros & Views
 
-Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Laravel. Consider the following routes as an example:
+Assim que você realizar a validação, você irá precisar de uma maneira fácil de passar as mensagens de erros para suas views. Isto é convenientemente tratado pelo Laravel. Considere as seguintes rotas como exemplo:
 
 	Route::get('register', function()
 	{
@@ -110,7 +110,7 @@ Once you have performed validation, you will need an easy way to get the error m
 		}
 	});
 
-Note that when validation fails, we pass the `Validator` instance to the Redirect using the `withErrors` method. This method will flash the error messages to the session so that they are available on the next request.
+Observe que quando a validação falha, nós passamos a instância `Validator` para o método Redirect utilizando o método `withErrors`. This method will flash the error messages to the session so that they are available on the next request.
 
 However, notice that we do not have to explicitly bind the error messages to the view in our GET route. This is because Laravel will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `$errors` variable will always be available in all of your views, on every request**, allowing you to conveniently assume the `$errors` variable is always defined and can be safely used. The `$errors` variable will be an instance of `MessageBag`.
 
@@ -119,9 +119,9 @@ So, after redirection, you may utilize the automatically bound `$errors` variabl
 	<?php echo $errors->first('email'); ?>
 
 <a name="available-validation-rules"></a>
-## Available Validation Rules
+## Regras de validação disponíves
 
-Below is a list of all available validation rules and their function:
+Abaixo está a lista de todas as regras de validação disponíves e suas funções:
 
 - [Accepted](#rule-accepted)
 - [Active URL](#rule-active-url)
@@ -157,42 +157,42 @@ Below is a list of all available validation rules and their function:
 <a name="rule-accepted"></a>
 #### accepted
 
-The field under validation must be _yes_, _on_, or _1_. This is useful for validating "Terms of Service" acceptance.
+O campo sob validação deve ser _yes_, _on_, ou _1_. Útil para validação de aceitação de "Termos de Serviço".
 
 <a name="rule-active-url"></a>
 #### active_url
 
-The field under validation must be a valid URL according to the `checkdnsrr` PHP function.
+O campo sob validação deve ser uma URL válida de acordo com a função `checkdnsrr` do PHP.
 
 <a name="rule-after"></a>
 #### after:_date_
 
-The field under validation must be a value after a given date. The dates will be passed into the PHP `strtotime` function.
+O campo sob validação deve ser um valor depois de uma determinada data. As datas serão passadas para a função `strtotime` do PHP.
 
 <a name="rule-alpha"></a>
 #### alpha
 
-The field under validation must be entirely alphabetic characters.
+O campo sob validação deve ser inteiramente formado por caracteres do alfabeto.
 
 <a name="rule-alpha-dash"></a>
 #### alpha_dash
 
-The field under validation may have alpha-numeric characters, as well as dashes and underscores.
+O campo sob validação pode ter caracteres alfa-numéricos, bem como traços e underscores.
 
 <a name="rule-alpha-num"></a>
 #### alpha_num
 
-The field under validation must be entirely alpha-numeric characters.
+O campo sob validação deve ser inteiramente formado por caracteres alfa-numéricos.
 
 <a name="rule-before"></a>
 #### before:_date_
 
-The field under validation must be a value preceding the given date. The dates will be passed into the PHP `strtotime` function.
+O campo sob validação deve ser um valor que antecede uma determinada data. As datas serão passadas para a função `strtotime` do PHP.
 
 <a name="rule-between"></a>
 #### between:_min_,_max_
 
-The field under validation must have a size between the given _min_ and _max_. Strings, numerics, and files are evaluated in the same fashion as the `size` rule.
+O campo sob validação deve ter um tamanho entre _min_ e _max_. Strings, numéricos, e arquivos são validados da mesma forma como a regra `size`.
 
 <a name="rule-confirmed"></a>
 #### confirmed
@@ -202,7 +202,7 @@ The field under validation must have a matching field of `foo_confirmation`. For
 <a name="rule-date"></a>
 #### date
 
-The field under validation must be a valid date according to the `strtotime` PHP function.
+O campo sob validação deve ser uma data válida de acordo com a função `strtotime` do PHP.
 
 <a name="rule-date-format"></a>
 #### date_format:_format_
@@ -212,96 +212,96 @@ The field under validation must match the _format_ defined according to the `dat
 <a name="rule-different"></a>
 #### different:_field_
 
-The given _field_ must be different than the field under validation.
+O campo _field_ deve ser diferente do campo sob validação.
 
 <a name="rule-email"></a>
 #### email
 
-The field under validation must be formatted as an e-mail address.
+O campo sob validação deve ser formatado como um endereço de e-mail.
 
 <a name="rule-exists"></a>
 #### exists:_table_,_column_
 
-The field under validation must exists on a given database table.
+O campo sob validação deve existir em um determinado banco de dados.
 
-**Basic Usage Of Exists Rule**
+**Uso básico da regra**
 
 	'state' => 'exists:states'
 
-**Specifying A Custom Column Name**
+**Especificando um nome de coluna**
 
 	'state' => 'exists:states,abbreviation'
 
 <a name="rule-image"></a>
 #### image
 
-The file under validation must be an image (jpeg, png, bmp, or gif)
+O campo sob validação deve ser uma imagem (jpeg, png, bmp, ou gif)
 
 <a name="rule-in"></a>
 #### in:_foo_,_bar_,...
 
-The field under validation must be included in the given list of values.
+O campo sob validação deve estar incluso na lista de valores dada.
 
 <a name="rule-integer"></a>
 #### integer
 
-The field under validation must have an integer value.
+O campo sob validação deve ser um valor inteiro.
 
 <a name="rule-ip"></a>
 #### ip
 
-The field under validation must be formatted as an IP address.
+O campo sob validação deve ser formatado como um endereço de IP.
 
 <a name="rule-max"></a>
 #### max:_value_
 
-The field under validation must be less than a maximum _value_. Strings, numerics, and files are evaluated in the same fashion as the `size` rule.
+The field under validation must be less than a maximum _value_. Strings, numéricos, e arquivos são validados da mesma forma como a regra `size`.
 
 <a name="rule-mimes"></a>
 #### mimes:_foo_,_bar_,...
 
-The file under validation must have a MIME type corresponding to one of the listed extensions.
+O campo sob validação deve ter um tipo MIME que corresponde a uma das extensões listadas.
 
-**Basic Usage Of MIME Rule**
+**Uso básico**
 
 	'photo' => 'mimes:jpeg,bmp,png'
 
 <a name="rule-min"></a>
 #### min:_value_
 
-The field under validation must have a minimum _value_. Strings, numerics, and files are evaluated in the same fashion as the `size` rule.
+O campo sob validação deve ter um _value_ minímo. Strings, numéricos, e arquivos são validados da mesma forma como a regra `size`.
 
 <a name="rule-not-in"></a>
 #### not_in:_foo_,_bar_,...
 
-The field under validation must not be included in the given list of values.
+O campo sob validação não deve estar incluso na lista de valores dada.
 
 <a name="rule-numeric"></a>
 #### numeric
 
-The field under validation must have a numeric value.
+O campo sob validação deve ter um valor numérico.
 
 <a name="rule-regex"></a>
 #### regex:_pattern_
 
-The field under validation must match the given regular expression.
+O campo sob validação deve corresponder à determinada expressão regular.
 
-**Note:** When using the `regex` pattern, it may be necessary to specify rules in an array instead of using pipe delimiters, especially if the regular expression contains a pipe character.
+**Nota:** Ao usar o padrão `regex`, poderá ser necessário especificar as regras em um array ao invés de utilizar o delimitador pipe, especialmente se a expressão regular contém um caracter pipe.
 
 <a name="rule-required"></a>
 #### required
 
-The field under validation must be present in the input data.
+O campo sob validação deve estar presente nos dados de entrada.
 
 <a name="rule-required-with"></a>
 #### required_with:_foo_,_bar_,...
 
-The field under validation must be present _only if_ the other specified fields are present.
+sThe field under validation must be present _only if_ the other specified fields are present.
 
 <a name="rule-same"></a>
 #### same:_field_
 
-The given _field_ must match the field under validation.
+O campo _field_ deve coincidir com o campo sob validação.
 
 <a name="rule-size"></a>
 #### size:_value_
@@ -313,11 +313,11 @@ The field under validation must have a size matching the given _value_. For stri
 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
-**Basic Usage Of Unique Rule**
+**Uso básico**
 
 	'email' => 'unique:users'
 
-**Specifying A Custom Column Name**
+**Especificando uma coluna**
 
 	'email' => 'unique:users,email_address'
 
@@ -328,7 +328,7 @@ The field under validation must be unique on a given database table. If the `col
 <a name="rule-url"></a>
 #### url
 
-The field under validation must be formatted as an URL.
+O campo sob validação deve ser formatada como uma URL.
 
 <a name="custom-error-messages"></a>
 ## Custom Error Messages
@@ -373,7 +373,7 @@ In some cases, you may wish to specify your custom messages in a language file i
 	),
 
 <a name="custom-validation-rules"></a>
-## Custom Validation Rules
+## Regras de validação personalizadas
 
 Laravel provides a variety of helpful validation rules; however, you may wish to specify some of your own. One method of registering custom validation rules is using the `Validator::extend` method:
 
@@ -392,7 +392,7 @@ Note that you will also need to define an error message for your custom rules. Y
 
 Instead of using Closure callbacks to extend the Validator, you may also extend the Validator class itself. To do so, write a Validator class that extends `Illuminate\Validation\Validator`. You may add validation methods to the class by prefixing them with `validate`:
 
-**Extending The Validator Class**
+**Extendendo a classe de validação**
 
 	<?php
 
@@ -405,7 +405,7 @@ Instead of using Closure callbacks to extend the Validator, you may also extend 
 
 	}
 
-Next, you need to register your custom Validator extension:
+Após, você precisar registrar sua extensão do validador personalizada:
 
 **Registering A Custom Validator Resolver**
 
