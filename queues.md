@@ -1,28 +1,28 @@
 # Queues
 
-- [Configuration](#configuration)
-- [Basic Usage](#basic-usage)
-- [Running The Queue Listener](#running-the-queue-listener)
+- [Configuração](#configuration)
+- [Uso Básico](#basic-usage)
+- [Rodando o Listener de Queues](#running-the-queue-listener)
 
 <a name="configuration"></a>
-## Configuration
+## Configuração
 
-The Laravel Queue component provides a unified API across a variety of different queue services. Queues allow you to defer the processing of a time consuming task, such as sending an e-mail, until a later time, thus drastically speeding up the web requests to your application.
+O componente de Queue do Laravel provê uma API unificada para uma variedade de serviçoes de queue diferentes. Queues permitem você adiar o processamento de uma tarefa que consome tempo, como enviar um e-mail, para outra hora, permitindo melhorar drasticamente o desenpenho das requisições em sua aplicação.
 
-The queue configuration file is stored in `app/config/queue.php`. In this file you will find connection configurations for each of the queue drivers that are included with the framework, which includes a [Beanstalkd](http://kr.github.com/beanstalkd), [IronMQ](http://iron.io), [Amazon SQS](http://aws.amazon.com/sqs), and synchronous (for local use) driver.
+O arquivo de configuração das Queues pode ser encontrado em `app/config/queue.php`. Nesse arquivo você encontrará configurações de conexão para cada driver de queues que é incluido com o Framework, que são: [Beanstalkd](http://kr.github.com/beanstalkd), [IronMQ](http://iron.io), [Amazon SQS](http://aws.amazon.com/sqs), e synchronous (para uso local).
 
 <a name="basic-usage"></a>
-## Basic Usage
+## Uso Básico
 
-To push a new job onto the queue, use the `Queue::push` method:
+Para enviar um novo trabalho para a queue, use o método `Queue::push`:
 
-**Pushing A Job Onto The Queue**
+**Enviando um trabalho para a Queue**
 
 	Queue::push('SendEmail', array('message' => $message));
 
-The first argument given to the `push` method is the name of the class that should be used to process the job. The second argument is array of data that should be passed to the handler. A job handler should be defined like so:
+O primeirop argumento dado ao método `push` é o nome da classe que deve ser usada para processa o trabalho. O segundo argumento é um array de dados que devem ser passados ao `Handler`. Um Handler de trabalhos deve ser definido como a seguir:
 
-**Defining A Job Handler**
+**Definindo um Handler e trabalhos**
 
 	class SendEmail {
 
@@ -33,37 +33,37 @@ The first argument given to the `push` method is the name of the class that shou
 
 	}
 
-Notice the only method that is required is `fire`, which receives a `Job` instance as well as the array of `data` that was pushed onto the queue.
+Note que o único método obrigatório é o método `fire`, que recebe uma instância de `Job` assim como o array de dados `data` que deve ser inserido na 	queue.
 
-Once you have processed a job, it must be deleted from the queue, which can be done via the `delete` method on the `Job` instance:
+Uma vêz que o trabalho foi processado, ele deve ser deletado da queue, o que pode ser feito com o método `delete` na instância `Job`:
 
-**Deleting A Processed Job**
+**Deletando uma tarefa processada**
 
 	public function fire($job, $data)
 	{
-		// Process the job...
+		// Processa a tarefa...
 
 		$job->delete();
 	}
 
-If you wish to release a job back onto the queue, you may do so via the `release` method:
+Se desejar mandar uma tarefa devolta para a queue, você pode utilizar o método `release`:
 
-**Releasing A Job Back Onto The Queue**
+**Enviando um método de volta a queue**
 
 	public function fire($job, $data)
 	{
-		// Process the job...
+		// Processa a tarefa...
 
 		$job->release();
 	}
 
-You may also specify the number of seconds to wait before the job is released:
+Você também pode especificar o número de segundos que a tarefa deve aguardar antes de voltar a queue:
 
 	$job->release(5);
 
-If an exception occurs while the job is being processed, it will automatically be released back onto the queue. You may check the number of attempts that have been made to run the job using the `attempts` method:
+Se um Exceção ocorrer enquanto um trabalho está sendo processado, ele será automaticamente enviado de volta a queue. Você pode verificar o número de tentativas que foram feiras usando o método `attempts`:
 
-**Checking The Number Of Run Attempts**
+**Verificando o número de tentativas**
 
 	if ($job->attempts() > 3)
 	{
@@ -71,28 +71,28 @@ If an exception occurs while the job is being processed, it will automatically b
 	}
 
 <a name="running-the-queue-listener"></a>
-## Running The Queue Listener
+## Rodando o Listener de Queues
 
-Laravel includes an Artisan task that will run new jobs as they are pushed onto the queue. You may run this task using the `queue:listen` command:
+O Laravel inclui uma tarefa do Artisan que irá rodar novas tarefas assim que enviadas a queue. você pode executálo atravéz do comando `queue:listen`:
 
-**Starting The Queue Listener**
+**Iniciando o Listener de Queues**
 
 	php artisan queue:listen
 
-You may also specify which queue connection the listener should utilize:
+Você também pode especificar qual conexão o Listener de Queues deve utilizar:
 
 	php artisan queue:listen connection
 
-Note that once this task has started, it will continue to run until it is manually stopped. You may use a process monitor such as [Supervisor](http://supervisord.org/) to ensure that the queue listener does not stop running.
+Note que uma vez que a tarefa é iniciada, ela irá permanecer rodando até que seja parada manualmente. Você talvez queira ver um monitor de processo como o  [Supervisor](http://supervisord.org/) Para garantir que o Listener não para de rodar.
 
-You may also set the length of time (in seconds) each job should be allowed run:
+Você também pode especificar a quantidade de tempo (em segundos) que cada trabalho é permitido a utilizar:
 
-**Specifying The Job Timeout Parameter**
+**Especificando o timeout para uma tarefa**
 
 	php artisan queue:listen --timeout=60
 
-To process only the first job on the queue, you may use the `queue:work` command:
+Para processar apenas o primeiro trabalho da Queue, você poderá utilizar o comando `queue:work`:
 
-**Processing The First Job On The Queue**
+**Processando o primeiro comando da Queue**
 
 	php artisan queue:work
