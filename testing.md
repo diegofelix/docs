@@ -1,9 +1,9 @@
 # Unit Testing
 
-- [Introduction](#introduction)
-- [Defining & Running Tests](#defining-and-running-tests)
-- [Test Environment](#test-environment)
-- [Calling Routes From Tests](#calling-routes-from-tests)
+- [Introdução](#introduction)
+- [Definindo e Executando Testes](#defining-and-running-tests)
+- [Testes de Ambiente](#test-environment)
+- [Chamando Rotas a Partir de Testes](#calling-routes-from-tests)
 - [Mocking Facades](#mocking-facades)
 - [Framework Assertions](#framework-assertions)
 - [Helper Methods](#helper-methods)
@@ -36,28 +36,28 @@ You may run all of the tests for your application by executing the `phpunit` com
 > **Note:** If you define your own `setUp` method, be sure to call `parent::setUp`.
 
 <a name="test-environment"></a>
-## Test Environment
+## Teste de Ambiente
 
-When running unit tests, Laravel will automatically set the configuration environment to `testing`. Also, Laravel includes configuration files for `session` and `cache` in the test environment. Both of these drivers are set to `array` while in the test environment, meaning no session or cache data will be persisted while testing. You are free to create other testing environment configurations as necessary.
+Ao executar testes unitários o Laravel irá definir automaticamente a configuração do ambiente para `testing`. Além disto o Laravel inclui arquivos de configuração para o `cache` e  `session` no ambiente de teste. Ambos os controladores estão definidos para `array` enquanto no ambiente de teste, ou seja, não serão mantidos dados de sessão ou de cache durante o teste. Você fica livre também para criar outras configurações de ambiente de testes, caso necessário.
 
 <a name="calling-routes-from-tests"></a>
-## Calling Routes From Tests
+## Chamando Rotas a Partir de Testes
 
-You may easily call one of your routes for a test using the `call` method:
+Você pode chamar facilmente qualquer uma de suas rotas para um teste usando o método `call`:
 
-**Calling A Route From A Test**
+**Chamando uma rota em um teste**
 
 	$response = $this->call('GET', 'user/profile');
 
 	$response = $this->call($method, $uri, $parameters, $files, $server, $content);
 
-You may then inspect the `Illuminate\Http\Response` object:
+Você pode então inspecionar o `Illuminate\Http\Response` object:
 
 	$this->assertEquals('Hello World', $response->getContent());
 
-You may also call a controller from a test:
+Você também pode chamar um controller a partir de um teste:
 
-**Calling A Controller From A Test**
+**Chamando um controller em um teste**
 
 	$response = $this->action('GET', 'HomeController@index');
 
