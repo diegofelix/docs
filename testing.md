@@ -9,14 +9,14 @@
 - [Helper Methods](#helper-methods)
 
 <a name="introduction"></a>
-## Introduction
+## Introdução
 
-Laravel is built with unit testing in mind. In fact, support for testing with PHPUnit is included out of the box, and a `phpunit.xml` file is already setup for your application. In addition to PHPUnit, Laravel also utilizes the Symfony HttpKernel, DomCrawler, and BrowserKit components to allow you to inspect and manipulate your views while testing, allowing to simulate a web browser.
+O Laravel foi construido com testes unutários em mente. Portanto isso há suporte para testes com PHPUnit é incluido out of the box, e um arquivo `phpunit.xml` que já está configurado para uso com sua aplicação. Além PHPUnit, o Laravel também utiliza o Symfony HttpKernel, DomCrawler, componentes BrowserKit para lhe permitir inspecionar e manipular suas views enquanto às testa, permitindo simular um navegador da web.
 
-An example test file is provided in the `app/tests` directory. After installing a new Laravel application, simply run `phpunit` on the command line to run your tests.
+Um arquivo exemplo de teste é fornecido no diretório `app/tests`. Depois de instalar uma nova aplicação laravel, simplesmente inicie o  `phpunit` na linha de comando para iniciar seus testes.
 
 <a name="defining-and-running-tests"></a>
-## Defining & Running Tests
+## Definindo e executando Testes
 
 To create a test case, simply create a new test file in the `app/tests` directory. The test class should extend `TestCase`. You may then define test methods as you normally would when using PHPUnit.
 
